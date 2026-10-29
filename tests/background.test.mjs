@@ -15,6 +15,7 @@ test('tracks tab changes, ambiguity, disconnect and expiry',()=>{
   const x=setup(), a=x.tab(), host=x.native[0];
   a.onMessage.emit({state:'active'}); assert.equal(host.messages.at(-1).state,'active');
   const b=x.tab(); b.onMessage.emit({state:'muted'}); assert.equal(host.messages.at(-1).state,'unknown');
+  b.onMessage.emit({state:'outside'}); assert.equal(host.messages.at(-1).state,'active');
   b.onDisconnect.emit(); assert.equal(host.messages.at(-1).state,'active');
   x.advance(46000); assert.equal(host.messages.at(-1).state,'unknown');
   a.onMessage.emit({state:'muted'}); assert.equal(host.messages.at(-1).state,'muted');

@@ -1,7 +1,7 @@
 # MeetOverlay
 
-**Experimental: not yet validated in a live Google Meet call. Do not rely on it
-as a safety indicator.** MeetOverlay is an independent Chromium MV3 extension
+**Experimental: tested in one Polish Google Meet call, but not yet validated
+across all supported environments. Do not rely on it as a safety indicator.** MeetOverlay is an independent Chromium MV3 extension
 and Qt 6 / LayerShellQt Wayland overlay that attempts to show Google Meet's own
 microphone state, without controlling the microphone or using PipeWire state.
 
@@ -9,7 +9,7 @@ Red means muted, green means active and grey means unknown. The indicator is
 click-through and does not request keyboard focus. The extension observes DOM
 changes and is independent of MeetMute. Google does not document a stable DOM
 interface; unsupported languages, changed controls, ambiguous controls or more
-than one Meet tab produce unknown. A grey indicator is not proof of mute.
+than one possible meeting tab produce unknown. The Meet home page is ignored. A grey indicator is not proof of mute.
 
 ![Illustration of indicator states](docs/images/indicator-example.svg)
 
@@ -19,9 +19,10 @@ The graphic is illustrative, not a screenshot.
 
 The application, host, extension and packaging are under development. Synthetic
 unit and local IPC tests pass. An Arch package was built, installed, reinstalled
-updated from r2 to r4 and removed locally; no live Meet test, Brave extension
-installation test, AUR publication, multi-monitor or HiDPI validation
-has been completed. Drag-to-position is not implemented. Do not
+updated from r2 to r4 and removed locally. One live Polish Meet call in Brave
+verified the reported state after a click and Ctrl+D, and local reconnection.
+The visual output, AUR publication, multi-monitor and HiDPI handling still need
+validation. Drag-to-position is not implemented. Do not
 use this project where a wrong indicator could cause harm. See
 [architecture](docs/architecture.md) for limitations and lifecycle details.
 

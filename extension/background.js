@@ -1,7 +1,7 @@
 const tabs = new Map();
 let nativePort = null, retry = null, retryDelay = 1000;
 function snapshot() {
-  const states = [...tabs.values()].map(v => v.state);
+  const states = [...tabs.values()].map(v => v.state).filter(state => state !== 'outside');
   // Multiple Meet tabs are ambiguous, even when they report the same state.
   return {state: states.length === 1 ? states[0] : 'unknown', count: states.length};
 }
@@ -30,7 +30,7 @@ chrome.runtime.onConnect.addListener(port => {
   const entry = {state: 'unknown', seen: Date.now()};
   tabs.set(port, entry);
   port.onMessage.addListener(message => {
-    if (!['muted', 'active', 'unknown'].includes(message?.state)) return;
+    if (!['muted', 'active', 'unknown', 'outside'].includes(message?.state)) return;
     entry.state = message.state; entry.seen = Date.now(); retryDelay = 1000; send();
   });
   port.onDisconnect.addListener(() => {

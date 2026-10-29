@@ -1,8 +1,8 @@
 # Research notes
 
-Public examples mention `data-is-muted` and accessible action labels, but they
-are not a Google-supported API. Observed examples are not proof that the same
-markup is used today, in Polish, or in all meeting lifecycle phases. In
+A Polish-language Brave meeting on 2026-10-29 exposed `data-is-muted`
+and accessible action labels matching the experimental detector. This is not a
+Google-supported API or proof that other languages and lifecycle phases match. In
 particular the pre-join screen can include microphone controls. The interpreter
 here is a testable hypothesis, not a selector to ship.
 

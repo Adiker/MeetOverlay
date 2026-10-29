@@ -1,6 +1,7 @@
 (() => {
   let port, last = null, scheduled = false, reconnect;
   function snapshot() {
+    if (["/", "/home"].includes(location.pathname)) return "outside";
     const controls = [...document.querySelectorAll('button,[role="button"]')].map(el => ({
       label: el.getAttribute('aria-label') || '',
       isMuted: el.getAttribute('data-is-muted'),

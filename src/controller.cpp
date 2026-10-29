@@ -7,6 +7,9 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QTimer>
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(meetoverlayStateLog, "meetoverlay.state", QtWarningMsg)
 
 static QVariant defaultValue(const QString &key) {
     static const QHash<QString, QVariant> defaults = {
@@ -89,6 +92,7 @@ void Controller::accept() {
                 if ((state != "active" && state != "muted" && state != "unknown") || !count.isDouble() || count.toInt(-1) < 0 || count.toInt(-1) > 1000) {
                     socket->disconnectFromServer(); return;
                 }
+                qCDebug(meetoverlayStateLog) << "Received state" << state << "tab count" << count.toInt();
                 auto &client = m_clients[socket]; client.state = state; client.count = count.toInt(); client.seen.restart();
             }
             updateState();
@@ -103,5 +107,5 @@ void Controller::updateState() {
         count += client.count; if (client.count == 1) state = client.state;
     }
     if (count != 1) state = "unknown";
-    if (m_state != state) { m_state = state; emit stateChanged(); }
+    if (m_state != state) { m_state = state; qCDebug(meetoverlayStateLog) << "Overlay state" << state; emit stateChanged(); }
 }

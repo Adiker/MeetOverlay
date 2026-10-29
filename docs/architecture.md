@@ -2,13 +2,13 @@
 
 The content script observes DOM mutations on meet.google.com and interprets a
 single visible microphone control only when an accessible leave-call control is
-also present. This heuristic is undocumented by Google and is not validated in a
-real meeting. Unknown or conflicting evidence produces `unknown`. No audio,
+also present. This heuristic is undocumented by Google. One Polish-language live meeting
+confirmed its labels and attributes; other configurations remain unvalidated. Unknown or conflicting evidence produces `unknown`. No audio,
 meeting URL, meeting title or participant data is sent to the native application.
 
 A background service worker maintains one port per Meet tab and one Native
-Messaging connection per browser profile. Multiple open Meet tabs deliberately
-produce unknown, including pre-join tabs. Each renderer receives a liveness
+Messaging connection per browser profile. Multiple possible meeting tabs deliberately produce unknown, including
+pre-join tabs; the explicit Meet home paths are excluded. Each renderer receives a liveness
 request every 15 seconds; after 45 seconds without a reply the state is unknown.
 The host validates native framing and forwards JSON over a same-user Unix socket
 in XDG_RUNTIME_DIR. The Qt application combines profiles: exactly one reported
