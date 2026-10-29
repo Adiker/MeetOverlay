@@ -1,0 +1,22 @@
+pkgbase = meetoverlay-git
+	pkgdesc = Wayland overlay for Google Meet microphone status
+	pkgver = 0.1.0.r1
+	pkgrel = 1
+	url = https://github.com/Adiker/MeetOverlay
+	arch = x86_64
+	license = MIT
+	checkdepends = nodejs
+	makedepends = cmake
+	makedepends = git
+	makedepends = ninja
+	makedepends = python
+	depends = qt6-base
+	depends = qt6-declarative
+	depends = qt6-wayland
+	depends = layer-shell-qt
+	provides = meetoverlay
+	conflicts = meetoverlay
+	source = git+https://github.com/Adiker/MeetOverlay.git
+	sha256sums = SKIP
+
+pkgname = meetoverlay-git

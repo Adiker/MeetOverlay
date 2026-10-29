@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "MeetOverlay",
+  "version": "0.1.0",
+  "description": "Reports Google Meet microphone state to MeetOverlay.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAszhPgizk4ZVsYu3x2c0+xmUAZ1tupLf9whcroTMyDJgo4oKj43hjbn5tWGEJupCfeKnD7VgtgsRsGyGO2/yg3to7fYc0iAndYkxlS+Jh51Dwol2HbGFmTt9Uq0IciFi63rRz8kLs7swKZphwU3PyxWstsFdkK7dh8WrsEXdAI0xV8IU7sakcEl2ZhHCE90HlIhcZbkakAG0j6HxU2OQ53f1FEuo8J8VOo2kePsHHaHMrcYVzlUeKGsp4/CwIlJg53KovrwoiCpnwsBUYOnzqAg5NBFSTeLvER9ZbgTdy4jtRm1o7fVZWzHIypXBgvumVZFOK0ilf/zBUXsTc7M6JJwIDAQAB",
+  "permissions": [
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "js": [
+        "detector.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

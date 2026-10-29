@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=MeetOverlay
+Exec=meetoverlay
+Icon=audio-input-microphone
+X-KDE-autostart-phase=2

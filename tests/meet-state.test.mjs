@@ -1,7 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { interpret } from '../research/meet-state.mjs';
-
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+const scope = vm.createContext({});
+vm.runInContext(readFileSync(new URL('../extension/detector.js', import.meta.url), 'utf8'), scope);
+const interpret = scope.meetOverlayInterpret;
 const leave = {label: 'Leave call', visible: true};
 const mic = (label, isMuted) => ({label, isMuted, visible: true});
 test('requires evidence of a joined call', () => {
@@ -10,6 +13,7 @@ test('requires evidence of a joined call', () => {
 test('recognizes inverse action labels', () => {
   assert.equal(interpret([leave, mic('Turn on microphone', 'true')]), 'muted');
   assert.equal(interpret([leave, mic('Turn off microphone', 'false')]), 'active');
+  assert.equal(interpret([{label:'Opuść rozmowę', visible:true}, mic('Włącz mikrofon', 'true')]), 'muted');
 });
 test('fails closed on conflicts and ambiguous controls', () => {
   assert.equal(interpret([leave, mic('Turn on microphone', 'false')]), 'unknown');

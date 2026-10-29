@@ -1,0 +1,7 @@
+{
+  "name": "org.meetoverlay.host",
+  "description": "MeetOverlay Native Messaging host",
+  "path": "@CMAKE_INSTALL_FULL_LIBDIR@/meetoverlay/meetoverlay-host",
+  "type": "stdio",
+  "allowed_origins": ["chrome-extension://kmblkihdhjjmpbbcmlagojgpijoebpfc/"]
+}

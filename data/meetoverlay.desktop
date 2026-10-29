@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=MeetOverlay Settings
+Comment=Configure the Google Meet microphone indicator
+Exec=meetoverlay --settings
+Icon=audio-input-microphone
+Categories=Settings;Utility;

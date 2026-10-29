@@ -1,0 +1,17 @@
+name: Build and test
+on: [push, pull_request]
+jobs:
+  arch:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install dependencies
+        run: pacman -Syu --noconfirm --needed base-devel git cmake ninja qt6-base qt6-declarative qt6-wayland layer-shell-qt nodejs python
+      - uses: actions/checkout@v4
+      - name: Build and test
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          ctest --test-dir build --output-on-failure
+          node --test tests/*.test.mjs
+          diff -u packaging/aur/.SRCINFO <(cd packaging/aur && makepkg --printsrcinfo)
