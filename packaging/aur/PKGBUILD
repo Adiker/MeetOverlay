@@ -1,13 +1,13 @@
 # Maintainer: Adiker <40745238+Adiker@users.noreply.github.com>
 _pkgname=meetoverlay
 pkgname=meetoverlay-git
-pkgver=0.1.0.r1
+pkgver=0.1.0.r2
 pkgrel=1
 pkgdesc='Wayland overlay for Google Meet microphone status'
 arch=('x86_64')
 url='https://github.com/Adiker/MeetOverlay'
 license=('MIT')
-depends=('qt6-base' 'qt6-declarative' 'qt6-wayland' 'layer-shell-qt')
+depends=('glibc' 'libgcc' 'libstdc++' 'qt6-base' 'qt6-declarative' 'qt6-wayland' 'layer-shell-qt')
 makedepends=('cmake' 'git' 'ninja' 'python')
 checkdepends=('nodejs')
 provides=('meetoverlay')
@@ -29,4 +29,5 @@ check() {
 }
 package() {
   DESTDIR="$pkgdir" cmake --install build
+  mv "$pkgdir/usr/share/licenses/meetoverlay" "$pkgdir/usr/share/licenses/$pkgname"
 }

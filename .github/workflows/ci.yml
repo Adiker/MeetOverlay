@@ -14,4 +14,5 @@ jobs:
           cmake --build build
           ctest --test-dir build --output-on-failure
           node --test tests/*.test.mjs
-          diff -u packaging/aur/.SRCINFO <(cd packaging/aur && makepkg --printsrcinfo)
+          runuser -u nobody -- sh -c "cd packaging/aur && makepkg --printsrcinfo" > /tmp/meetoverlay-srcinfo
+          diff -u packaging/aur/.SRCINFO /tmp/meetoverlay-srcinfo

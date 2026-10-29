@@ -14,8 +14,10 @@ than one Meet tab produce unknown. A grey indicator is not proof of mute.
 ## Status
 
 The application, host, extension and packaging are under development. Synthetic
-unit and local IPC tests pass, but no live Meet test, Brave installation test,
-AUR installation, multi-monitor or HiDPI validation has been completed. Do not
+unit and local IPC tests pass. An Arch package was built, installed, reinstalled
+and removed locally; no live Meet test, Brave extension installation test,
+version-to-version upgrade, AUR publication, multi-monitor or HiDPI validation
+has been completed. Drag-to-position is not implemented. Do not
 use this project where a wrong indicator could cause harm. See
 [architecture](docs/architecture.md) for limitations and lifecycle details.
 
