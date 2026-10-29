@@ -21,7 +21,7 @@ pkgver() {
 build() {
   cmake -S MeetOverlay -B build -G Ninja -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr
-  cmake --build build
+  cmake --build build --parallel "${CMAKE_BUILD_PARALLEL_LEVEL:-2}"
 }
 check() {
   ctest --test-dir build --output-on-failure

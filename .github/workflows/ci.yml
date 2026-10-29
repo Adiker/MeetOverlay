@@ -11,7 +11,7 @@ jobs:
       - name: Build and test
         run: |
           cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
-          cmake --build build
+          cmake --build build --parallel 2
           ctest --test-dir build --output-on-failure
           node --test tests/*.test.mjs
           mkdir /tmp/meetoverlay-aur

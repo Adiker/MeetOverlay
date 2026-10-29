@@ -7,6 +7,7 @@ ApplicationWindow {
     width: 720; height: 760; minimumWidth: 550; minimumHeight: 500; visible: true
     title: qsTr("MeetOverlay Settings")
     property int revision: controller.revision
+    property string previewState: ["muted", "active", "unknown"][previewChoice.currentIndex]
     function value(key) { revision; return controller.get(key) }
     SystemPalette { id: systemPalette; colorGroup: SystemPalette.Active }
     ColorDialog { id: colorDialog; property string key; onAccepted: controller.set(key, selectedColor.toString()) }
@@ -15,7 +16,12 @@ ApplicationWindow {
       anchors.fill: parent; contentWidth: availableWidth
       ColumnLayout {
         width: parent.width; spacing: 12
-        Label { text: qsTr("Preview"); font.bold: true; Layout.margins: 12 }
+        RowLayout {
+          Layout.fillWidth: true; Layout.margins: 12
+          Label { text: qsTr("Appearance preview"); font.bold: true; Layout.fillWidth: true }
+          ComboBox { id: previewChoice; model: [qsTr("Muted"), qsTr("Live"), qsTr("Unknown")]; currentIndex: 0; Accessible.name: qsTr("Preview state") }
+        }
+        Label { text: qsTr("Preview only — does not show the current microphone state"); Layout.leftMargin: 12; Layout.rightMargin: 12; wrapMode: Text.WordWrap; Layout.fillWidth: true }
         Rectangle {
           Layout.alignment: Qt.AlignHCenter
           readonly property int base: Number(window.value("size"))
@@ -24,8 +30,8 @@ ApplicationWindow {
           radius: mode === "capsule" ? height / 2 : window.value("radius")
           color: { let automatic = window.value("autoTheme"); let c = Qt.color(automatic === true || automatic === "true" ? systemPalette.window : window.value("background")); c.a = window.value("opacity"); return c }
           border.color: window.value("border")
-          Indicator { width: parent.base; height: parent.base; state: "muted" }
-          Text { visible: parent.mode !== "icon"; anchors.left: parent.left; anchors.leftMargin: parent.base; anchors.verticalCenter: parent.verticalCenter; text: qsTr("Muted"); color: window.value("muted"); font.pixelSize: Math.max(12, parent.base * .22); font.bold: true }
+          Indicator { width: parent.base; height: parent.base; state: window.previewState }
+          Text { visible: parent.mode !== "icon"; anchors.left: parent.left; anchors.leftMargin: parent.base; anchors.verticalCenter: parent.verticalCenter; text: window.previewState === "muted" ? qsTr("Muted") : window.previewState === "active" ? qsTr("Live") : qsTr("Unknown"); color: window.value(window.previewState); font.pixelSize: Math.max(12, parent.base * .22); font.bold: true }
         }
         GridLayout {
           columns: 2; columnSpacing: 15; rowSpacing: 8; Layout.fillWidth: true; Layout.margins: 16
