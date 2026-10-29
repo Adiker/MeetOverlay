@@ -11,6 +11,10 @@ changes and is independent of MeetMute. Google does not document a stable DOM
 interface; unsupported languages, changed controls, ambiguous controls or more
 than one Meet tab produce unknown. A grey indicator is not proof of mute.
 
+![Illustration of indicator states](docs/images/indicator-example.svg)
+
+The graphic is illustrative, not a screenshot.
+
 ## Status
 
 The application, host, extension and packaging are under development. Synthetic
