@@ -19,8 +19,8 @@ The graphic is illustrative, not a screenshot.
 
 The application, host, extension and packaging are under development. Synthetic
 unit and local IPC tests pass. An Arch package was built, installed, reinstalled
-and removed locally; no live Meet test, Brave extension installation test,
-version-to-version upgrade, AUR publication, multi-monitor or HiDPI validation
+updated from r2 to r4 and removed locally; no live Meet test, Brave extension
+installation test, AUR publication, multi-monitor or HiDPI validation
 has been completed. Drag-to-position is not implemented. Do not
 use this project where a wrong indicator could cause harm. See
 [architecture](docs/architecture.md) for limitations and lifecycle details.
